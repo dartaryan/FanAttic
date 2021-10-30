@@ -15,9 +15,10 @@ import { MatCardModule } from '@angular/material/card';
 import { AuthenticatorComponent } from './tools/authenticator/authenticator.component';
 import { StarsComponent } from './tools/stars/stars.component';
 import { LadderComponent } from './tools/ladder/ladder.component';
+import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AuthenticatorComponent, StarsComponent, LadderComponent],
+  declarations: [AppComponent, HomeComponent, AuthenticatorComponent, StarsComponent, LadderComponent, EmailVerificationComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
