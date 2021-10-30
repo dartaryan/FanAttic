@@ -1,7 +1,9 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/FirebaseTSAuth';
+import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { AuthenticatorComponent } from './tools/authenticator/authenticator.component';
 
 @Component({
@@ -12,7 +14,11 @@ import { AuthenticatorComponent } from './tools/authenticator/authenticator.comp
 export class AppComponent {
   title = 'FanAttic';
   auth = new FirebaseTSAuth();
+  firestore = new FirebaseTSFirestore();
   isLoggedIn = false;
+  userHasProfile = true;
+  userDocument: UserDocument;
+
   constructor(private loginSheet: MatBottomSheet, private router: Router) {
     this.auth.listenToSignInStateChanges((user) => {
       this.auth.checkSignInState({
@@ -28,10 +34,23 @@ export class AppComponent {
           this.router.navigate(['emailVerification']);
         },
 
-        whenSignedInAndEmailVerified: (user) => {},
+        whenSignedInAndEmailVerified: (user) => {
+          this.getUserProfile();
+        },
 
         whenChanged: (user) => {},
       });
+    });
+  }
+
+  getUserProfile() {
+    this.firestore.listenToDocument({
+      name: 'Getting Document',
+      path: ['Users', this.auth.getAuth().currentUser.uid],
+      onUpdate: (result) => {
+        this.userDocument = <UserDocument>result.data();
+        this.userHasProfile = result.exists;
+      },
     });
   }
 
@@ -45,4 +64,9 @@ export class AppComponent {
   onLoginClick() {
     this.loginSheet.open(AuthenticatorComponent);
   }
+}
+
+export interface UserDocument {
+  publicName: string;
+  description: string;
 }

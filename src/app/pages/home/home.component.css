@@ -1,6 +1,7 @@
 #home-page {
   width: 100%;
   height: 100%;
+
 }
 #home-page-landing {
   width: 100%;
@@ -12,6 +13,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 100%;
   min-height: 800px;
+  
 }
 
 #landing-left {
@@ -19,12 +21,7 @@
   color: white;
   justify-content: center;
   align-content: center;
-  /* background-color: #ffffff;
-  color: transparent;
-  text-shadow: 0px 2px 3px rgb(255, 255, 255);
-  -webkit-background-clip: text;
-     -moz-background-clip: text;
-          background-clip: text; */
+  padding-top: 2em;
 }
 
 #landing-left-content {
