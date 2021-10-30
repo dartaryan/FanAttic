@@ -16,9 +16,10 @@ import { AuthenticatorComponent } from './tools/authenticator/authenticator.comp
 import { StarsComponent } from './tools/stars/stars.component';
 import { LadderComponent } from './tools/ladder/ladder.component';
 import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
+import { ProfileComponent } from './tools/profile/profile.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AuthenticatorComponent, StarsComponent, LadderComponent, EmailVerificationComponent],
+  declarations: [AppComponent, HomeComponent, AuthenticatorComponent, StarsComponent, LadderComponent, EmailVerificationComponent, ProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
