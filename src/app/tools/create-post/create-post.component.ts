@@ -13,10 +13,15 @@ export class CreatePostComponent implements OnInit {
 
   onPhotoSelected(photoSelector: HTMLInputElement) {
     this.selectedImageFile = photoSelector.files[0];
+    if(!this.selectedImageFile) return;
     let fileReader = new FileReader();
     fileReader.readAsDataURL(this.selectedImageFile);
     fileReader.addEventListener('loadend', (ev) => {
       let readableString = fileReader.result.toString();
+      let postPreviewImage = <HTMLImageElement>(
+        document.getElementById('post-preview-image')
+      );
+      postPreviewImage.src = readableString;
     });
   }
 }
