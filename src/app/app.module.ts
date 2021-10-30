@@ -17,9 +17,23 @@ import { StarsComponent } from './tools/stars/stars.component';
 import { LadderComponent } from './tools/ladder/ladder.component';
 import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
 import { ProfileComponent } from './tools/profile/profile.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { PostFeedComponent } from './pages/post-feed/post-feed.component';
+import { CreatePostComponent } from './tools/create-post/create-post.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AuthenticatorComponent, StarsComponent, LadderComponent, EmailVerificationComponent, ProfileComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    AuthenticatorComponent,
+    StarsComponent,
+    LadderComponent,
+    EmailVerificationComponent,
+    ProfileComponent,
+    PostFeedComponent,
+    CreatePostComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,9 +41,11 @@ import { ProfileComponent } from './tools/profile/profile.component';
     MatButtonModule,
     MatBottomSheetModule,
     MatCardModule,
+    MatIconModule,
+    MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent,StarsComponent],
+  bootstrap: [AppComponent, StarsComponent],
 })
 export class AppModule {
   constructor() {
