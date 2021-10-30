@@ -13,9 +13,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatCardModule } from '@angular/material/card';
 import { AuthenticatorComponent } from './tools/authenticator/authenticator.component';
+import { StarsComponent } from './tools/stars/stars.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AuthenticatorComponent],
+  declarations: [AppComponent, HomeComponent, AuthenticatorComponent, StarsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,7 +26,7 @@ import { AuthenticatorComponent } from './tools/authenticator/authenticator.comp
     MatCardModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent,StarsComponent],
 })
 export class AppModule {
   constructor() {
