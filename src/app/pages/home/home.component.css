@@ -19,7 +19,16 @@
   color: white;
   justify-content: center;
   align-content: center;
+  /* background-color: #ffffff;
+  color: transparent;
+  text-shadow: 0px 2px 3px rgb(255, 255, 255);
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text; */
+  
 }
+
+
 
 #landing-left-content {
   text-align: right;
@@ -35,4 +44,16 @@
 #landing-left-content button {
   font-size: 2em;
   padding: 0.5em;
+}
+
+
+
+
+h1 {
+  /* background-color: #ffffff;
+  color: transparent;
+  text-shadow: 0px 2px 3px rgba(151, 151, 151, 0.692);
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text; */
 }

@@ -14,9 +14,10 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatCardModule } from '@angular/material/card';
 import { AuthenticatorComponent } from './tools/authenticator/authenticator.component';
 import { StarsComponent } from './tools/stars/stars.component';
+import { LadderComponent } from './tools/ladder/ladder.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AuthenticatorComponent, StarsComponent],
+  declarations: [AppComponent, HomeComponent, AuthenticatorComponent, StarsComponent, LadderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
