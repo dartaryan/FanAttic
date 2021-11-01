@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from 'src/environments/environment';
-import { FirebaseTSApp } from 'firebasets/firebasetsApp/FirebaseTSApp';
+import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 import { HomeComponent } from './pages/home/home.component';
 
 import { MatButtonModule } from '@angular/material/button';

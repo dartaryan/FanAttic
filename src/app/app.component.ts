@@ -1,9 +1,10 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 import { Component } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/FirebaseTSAuth';
-import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
+
+import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/FirebaseTSFirestore';
 import { AuthenticatorComponent } from './tools/authenticator/authenticator.component';
 
 @Component({
