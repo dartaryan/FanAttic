@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/FirebaseTSFirestore';
 import { FirebaseTSStorage } from 'firebasets/FirebasetsStorage/FirebaseTSStorage';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/FirebaseTSAuth';
+import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-post',
@@ -15,20 +17,55 @@ export class CreatePostComponent implements OnInit {
   firestore = new FirebaseTSFirestore();
   storage = new FirebaseTSStorage();
 
-  constructor() {}
+  constructor(private dialog: MatDialogRef<CreatePostComponent>) {}
 
   ngOnInit(): void {}
 
-  onPostClicked(commentInput: HTMLTextAreaElement) {
+  onPostClick(commentInput: HTMLTextAreaElement) {
     let comment = commentInput.value;
-    let postId = this.firestore.genDocId()
+    if (comment.length <= 0) return;
+    if (this.selectedImageFile) {
+      this.uploadImagePost(comment);
+    } else {
+      this.uploadPost(comment);
+    }
+  }
+
+  uploadImagePost(comment: string) {
+    let postId = this.firestore.genDocId();
     this.storage.upload({
-      uploadName: "upload Image Post",
-      path: ["Posts",postId,"image"],
-      data: { data: this.selectedImageFile}, onComplete: (downloadUrl) => {
-        alert(downloadUrl)
-      }
-    })
+      uploadName: 'upload Image Post',
+      path: ['Posts', postId, 'image'],
+      data: { data: this.selectedImageFile },
+      onComplete: (downloadUrl) => {
+        this.firestore.create({
+          path: ['Posts', postId],
+          data: {
+            comment: comment,
+            creatorId: this.auth.getAuth().currentUser.uid,
+            imageUrl: downloadUrl,
+            timestamp: FirebaseTSApp.getFirestoreTimestamp(),
+          },
+          onComplete: (docId) => {
+            this.dialog.close();
+          },
+        });
+      },
+    });
+  }
+
+  uploadPost(comment: string) {
+    this.firestore.create({
+      path: ['Posts'],
+      data: {
+        comment: comment,
+        creatorId: this.auth.getAuth().currentUser.uid,
+        timestamp: FirebaseTSApp.getFirestoreTimestamp(),
+      },
+      onComplete: (docId) => {
+        this.dialog.close();
+      },
+    });
   }
 
   onPhotoSelected(photoSelector: HTMLInputElement) {
