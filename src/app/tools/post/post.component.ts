@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/FirebaseTSFirestore';
 import { PostData } from 'src/app/pages/post-feed/post-feed.component';
+import { ReplyComponent } from '../reply/reply.component';
 
 @Component({
   selector: 'app-post',
@@ -8,7 +11,28 @@ import { PostData } from 'src/app/pages/post-feed/post-feed.component';
 })
 export class PostComponent implements OnInit {
   @Input() postData: PostData;
-  constructor() {}
+  firestore = new FirebaseTSFirestore();
+  creatorName: string;
+  creatorDescription: string;
 
-  ngOnInit(): void {}
+  constructor(private dialog: MatDialog) {}
+
+  ngOnInit(): void {
+    this.getCreatorInfo();
+  }
+
+  onReplyClick() {
+    this.dialog.open(ReplyComponent);
+  }
+
+  getCreatorInfo() {
+    this.firestore.getDocument({
+      path: ['Users', this.postData.creatorId],
+      onComplete: (result) => {
+        let userDocument = result.data();
+        this.creatorName = userDocument.publicName;
+        this.creatorDescription = userDocument.description;
+      },
+    });
+  }
 }

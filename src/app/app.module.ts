@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PostFeedComponent } from './pages/post-feed/post-feed.component';
 import { CreatePostComponent } from './tools/create-post/create-post.component';
 import { PostComponent } from './tools/post/post.component';
+import { ReplyComponent } from './tools/reply/reply.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PostComponent } from './tools/post/post.component';
     PostFeedComponent,
     CreatePostComponent,
     PostComponent,
+    ReplyComponent,
   ],
   imports: [
     BrowserModule,
