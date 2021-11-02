@@ -11,7 +11,7 @@
         Logout
       </div>
       <div *ngIf="loggedIn() && userHasProfile" class="nav-bar-items">
-        Hey {{ userDocument.publicName | titlecase }}
+        Hey {{ getUserName() | titlecase }}
       </div>
     </div>
   </div>

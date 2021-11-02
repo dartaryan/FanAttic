@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
@@ -18,7 +17,7 @@ export class AppComponent {
   firestore = new FirebaseTSFirestore();
   isLoggedIn = false;
   userHasProfile = true;
-  userDocument: UserDocument;
+  private static userDocument: UserDocument;
 
   constructor(private loginSheet: MatBottomSheet, private router: Router) {
     this.auth.listenToSignInStateChanges((user) => {
@@ -28,7 +27,7 @@ export class AppComponent {
         },
 
         whenSignedOut: (user) => {
-          this.isLoggedIn = false;
+          AppComponent.userDocument = null;
         },
 
         whenSignedInAndEmailNotVerified: (user) => {
@@ -43,14 +42,27 @@ export class AppComponent {
       });
     });
   }
+  public static getUserDocument() {
+    return AppComponent.userDocument;
+  }
+
+  getUserName() {
+    try {
+      return AppComponent.userDocument.publicName;
+    } catch (error) {
+      return "stranger"
+      console.log(error);
+    }
+  }
 
   getUserProfile() {
     this.firestore.listenToDocument({
       name: 'Getting Document',
       path: ['Users', this.auth.getAuth().currentUser.uid],
       onUpdate: (result) => {
-        this.userDocument = <UserDocument>result.data();
+        AppComponent.userDocument = <UserDocument>result.data();
         this.userHasProfile = result.exists;
+        AppComponent.userDocument.userId = this.auth.getAuth().currentUser.uid;
         if (this.userHasProfile) {
           this.router.navigate(['postfeed']);
         }
@@ -73,4 +85,5 @@ export class AppComponent {
 export interface UserDocument {
   publicName: string;
   description: string;
+  userId: string;
 }
